@@ -44,6 +44,20 @@ services:
     ports:
       - 3002:8080
 
+  address:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "123"
+
+  addressSpring:
+    image: mateusmedeirosgarcia/address-bantads:latest
+    container_name: 'addressSpring-bantads'
+    environment:
+      - DATABASE_URL=address
+      - DATABASE_PORT=5432
+    ports:
+      - 3004:8080
+
   customer:
     image: postgres
     environment:
@@ -59,6 +73,22 @@ services:
       - DATABASE_PORT=5432
     ports:
       - 3003:8080
+
+  manager:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "123"
+    ports:
+      - 5434:5432
+
+  managerSpring:
+    image: mateusmedeirosgarcia/manager-bantads:latest
+    container_name: 'managerSpring-bantads'
+    environment:
+      - DATABASE_URL=manager
+      - DATABASE_PORT=5432
+    ports:
+      - 3005:8080
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
