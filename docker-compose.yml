@@ -90,6 +90,28 @@ services:
     ports:
       - 3005:8080
 
+  mongoAuthentication:
+    image: 'mongo'
+    environment:
+      MONGO_INITDB_DATABASE: test
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - '27017:27017'
+
+  authenticationSpring:
+    image: mateusmedeirosgarcia/authentication-bantads:latest
+    container_name: 'authenticationSpring-bantads'
+    environment:
+      - MONGODB_HOST=mongoAuthentication
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=auth
+      - MONGODB_USERNAME=username
+      - MONGODB_PASSWORD=password
+    ports:
+      - 3006:8080
+
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
