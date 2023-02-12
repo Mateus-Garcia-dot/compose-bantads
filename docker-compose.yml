@@ -6,46 +6,46 @@ services:
     ports:
       - 5432:5432
 
-  # springAccountCUD:
-  #   image: mateusmedeirosgarcia/account-bantads:latest
-  #   container_name: 'springAccountCUD'
-  #   environment:
-  #     - DATABASE_URL=accountCUD
-  #     - DATABASE_PORT=5432
-  #     - RABBITMQ_URL=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USERNAME=guest
-  #     - RABBITMQ_PASSWORD=guest
-  #     - RABBITMQ_QUEUE_CREATE=accountCUD.create
-  #     - RABBITMQ_QUEUE_UPDATE=accountCUD.update
-  #     - RABBITMQ_QUEUE_DELETE=accountCUD.delete
-  #   ports:
-  #     - 3000:8080
-  #   depends_on:
-  #     - orchestrador-saga
+  springAccountCUD:
+    image: mateusmedeirosgarcia/account-bantads:latest
+    container_name: 'springAccountCUD'
+    environment:
+      - DATABASE_URL=accountCUD
+      - DATABASE_PORT=5432
+      - RABBITMQ_URL=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_QUEUE_CREATE=accountCUD.create
+      - RABBITMQ_QUEUE_UPDATE=accountCUD.update
+      - RABBITMQ_QUEUE_DELETE=accountCUD.delete
+    ports:
+      - 3000:8080
+    depends_on:
+      - orchestrador-saga
 
   accountR:
     image: postgres
     environment:
       POSTGRES_PASSWORD: "123"
 
-  # springAccountR:
-  #   image: mateusmedeirosgarcia/account-bantads:latest
-  #   container_name: 'springAccountR'
-  #   environment:
-  #     - DATABASE_URL=accountR
-  #     - DATABASE_PORT=5432
-  #     - RABBITMQ_URL=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USERNAME=guest
-  #     - RABBITMQ_PASSWORD=guest
-  #     - RABBITMQ_QUEUE_CREATE=accountR.create
-  #     - RABBITMQ_QUEUE_UPDATE=accountR.update
-  #     - RABBITMQ_QUEUE_DELETE=accountR.delete
-  #   ports:
-  #     - 3001:8080
-  #   depends_on:
-  #     - orchestrador-saga
+  springAccountR:
+    image: mateusmedeirosgarcia/account-bantads:latest
+    container_name: 'springAccountR'
+    environment:
+      - DATABASE_URL=accountR
+      - DATABASE_PORT=5432
+      - RABBITMQ_URL=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_QUEUE_CREATE=accountR.create
+      - RABBITMQ_QUEUE_UPDATE=accountR.update
+      - RABBITMQ_QUEUE_DELETE=accountR.delete
+    ports:
+      - 3001:8080
+    depends_on:
+      - orchestrador-saga
 
   springAccountRabbitMq:
     image: mateusmedeirosgarcia/rabbitmq-account-bantads
@@ -69,18 +69,18 @@ services:
     environment:
       POSTGRES_PASSWORD: "123"
 
-  # addressSpring:
-  #   image: mateusmedeirosgarcia/address-bantads:latest
-  #   container_name: 'addressSpring-bantads'
-  #   environment:
-  #     - DATABASE_URL=address
-  #     - DATABASE_PORT=5432
-  #     - RABBITMQ_URL=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USERNAME=guest
-  #     - RABBITMQ_PASSWORD=guest
-  #   ports:
-  #     - 3004:8080
+  addressSpring:
+    image: mateusmedeirosgarcia/address-bantads:latest
+    container_name: 'addressSpring-bantads'
+    environment:
+      - DATABASE_URL=address
+      - DATABASE_PORT=5432
+      - RABBITMQ_URL=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+    ports:
+      - 3004:8080
 
   customer:
     image: postgres
@@ -138,23 +138,23 @@ services:
     ports:
       - '27017:27017'
 
-  # authenticationSpring:
-  #   image: mateusmedeirosgarcia/authentication-bantads:latest
-  #   container_name: 'authenticationSpring-bantads'
-  #   environment:
-  #     - MONGODB_HOST=mongoAuthentication
-  #     - MONGODB_PORT=27017
-  #     - MONGODB_DATABASE=auth
-  #     - MONGODB_USERNAME=username
-  #     - MONGODB_PASSWORD=password
-  #     - RABBITMQ_URL=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USERNAME=guest
-  #     - RABBITMQ_PASSWORD=guest
-  #   ports:
-  #     - 3006:8080
-  #   depends_on:
-  #     - orchestrador-saga
+  authenticationSpring:
+    image: mateusmedeirosgarcia/authentication-bantads:latest
+    container_name: 'authenticationSpring-bantads'
+    environment:
+      - MONGODB_HOST=mongoAuthentication
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=auth
+      - MONGODB_USERNAME=username
+      - MONGODB_PASSWORD=password
+      - RABBITMQ_URL=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+    ports:
+      - 3006:8080
+    depends_on:
+      - orchestrador-saga
 
   orchestrador-saga:
     image: mateusmedeirosgarcia/orchestrator-saga-bantads:latest
