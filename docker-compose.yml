@@ -20,6 +20,7 @@ services:
       - RABBITMQ_QUEUE_UPDATE=accountCUD.update
       - RABBITMQ_QUEUE_DELETE=accountCUD.delete
       - RABBITMQ_QUEUE_PATCH_CONSUMER=accountCUD.patch.consumer
+      - RABBITMQ_QUEUE_DELETE_MANAGER=accountCUD.delete.manager
     ports:
       - 3000:8080
     depends_on:
@@ -44,6 +45,7 @@ services:
       - RABBITMQ_QUEUE_UPDATE=accountR.update
       - RABBITMQ_QUEUE_DELETE=accountR.delete
       - RABBITMQ_QUEUE_PATCH_CONSUMER=accountR.patch.consumer
+      - RABBITMQ_QUEUE_DELETE_MANAGER=accountR.delete.manager
     ports:
       - 3001:8080
     depends_on:
