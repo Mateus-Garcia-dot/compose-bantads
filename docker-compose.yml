@@ -19,6 +19,7 @@ services:
       - RABBITMQ_QUEUE_CREATE=accountCUD.create
       - RABBITMQ_QUEUE_UPDATE=accountCUD.update
       - RABBITMQ_QUEUE_DELETE=accountCUD.delete
+      - RABBITMQ_QUEUE_PATCH_CONSUMER=accountCUD.patch.consumer
     ports:
       - 3000:8080
     depends_on:
@@ -42,6 +43,7 @@ services:
       - RABBITMQ_QUEUE_CREATE=accountR.create
       - RABBITMQ_QUEUE_UPDATE=accountR.update
       - RABBITMQ_QUEUE_DELETE=accountR.delete
+      - RABBITMQ_QUEUE_PATCH_CONSUMER=accountR.patch.consumer
     ports:
       - 3001:8080
     depends_on:
@@ -104,8 +106,6 @@ services:
     depends_on:
       - orchestrador-saga
 
-
-
   manager:
     image: postgres
     environment:
@@ -127,7 +127,6 @@ services:
       - 3005:8080
     depends_on:
       - orchestrador-saga
-
 
   mongoAuthentication:
     image: 'mongo'
@@ -173,5 +172,5 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
-        - 5672:5672
-        - 15672:15672
+      - 5672:5672
+      - 15672:15672
