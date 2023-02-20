@@ -24,7 +24,7 @@ services:
     ports:
       - 3000:8080
     depends_on:
-      - orchestrador-saga
+      - orchestradorSaga
 
   accountR:
     image: postgres
@@ -49,7 +49,7 @@ services:
     ports:
       - 3001:8080
     depends_on:
-      - orchestrador-saga
+      - orchestradorSaga
 
   springAccountRabbitMq:
     image: mateusmedeirosgarcia/rabbitmq-account-bantads
@@ -66,7 +66,7 @@ services:
     ports:
       - 3002:8080
     depends_on:
-      - orchestrador-saga
+      - orchestradorSaga
 
   address:
     image: postgres
@@ -106,7 +106,7 @@ services:
     ports:
       - 3003:8080
     depends_on:
-      - orchestrador-saga
+      - orchestradorSaga
 
   manager:
     image: postgres
@@ -128,7 +128,7 @@ services:
     ports:
       - 3005:8080
     depends_on:
-      - orchestrador-saga
+      - orchestradorSaga
 
   mongoAuthentication:
     image: 'mongo'
@@ -155,11 +155,11 @@ services:
     ports:
       - 3006:8080
     depends_on:
-      - orchestrador-saga
+      - orchestradorSaga
 
-  orchestrador-saga:
+  orchestradorSaga:
     image: mateusmedeirosgarcia/orchestrator-saga-bantads:latest
-    container_name: 'orchestrador-saga'
+    container_name: 'orchestradorSaga'
     environment:
       - RABBITMQ_URL=rabbitmq
       - RABBITMQ_PORT=5672
@@ -176,3 +176,17 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+
+  gateway:
+    image: mateusmedeirosgarcia/gateway-bantads
+    container_name: 'gateway-bantads'
+    environment:
+      - PORT=3000
+      - ACCOUNT_URL=springAccountRabbitMq:8080
+      - ADDRESS_URL=addressSpring:8080
+      - CUSTOMER_URL=customerSpring:8080
+      - MANAGER_URL=managerSpring:8080
+      - AUTHENTICATION_URL=authenticationSpring:8080
+      - ORCHESTRATOR_URL=orchestradorSaga:8080
+    ports:
+      - 3332:3000
