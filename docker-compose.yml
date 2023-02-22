@@ -189,10 +189,10 @@ services:
       - AUTHENTICATION_URL=authenticationSpring:8080
       - ORCHESTRATOR_URL=orchestradorSaga:8080
     ports:
-      - 3332:3000
+      - 3333:3000
 
   front:
     image: mateusmedeirosgarcia/bantads
     container_name: 'bantads'
     ports:
-      - 4200:4200
+      - 80:80
